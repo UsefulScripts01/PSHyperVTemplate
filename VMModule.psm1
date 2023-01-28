@@ -60,6 +60,7 @@ function New-Vmachine {
     # "START" switch
     if ($Start) { Start-VM -Name $VMName }
 }
+Export-ModuleMember -Function New-Vmachine
 
 function Remove-Vmachine {
     param (
