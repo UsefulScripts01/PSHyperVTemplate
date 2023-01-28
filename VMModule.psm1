@@ -66,9 +66,9 @@ function Remove-Vmachine {
     switch ([System.Environment]::OSVersion.Platform) {
         Win32NT {
             if ((Get-VM).Name.Contains($Name)) {
-                #$Vhdx = (Get-VMHardDiskDrive -VMName $Name).Path
-                Get-VMHardDiskDrive -VMName $Name | Remove-VMHardDiskDrive
+                $Vhdx = (Get-VMHardDiskDrive -VMName $Name).Path
                 Remove-VM -Name $Name
+                Remove-Item -Path $Vhdx
             }
             else { Write-Warning "Machine $Name does not exist.." }
         }
