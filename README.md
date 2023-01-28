@@ -1,6 +1,6 @@
-# PsModules
+## PsModules
 
-isPies
+#### VMModule
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
