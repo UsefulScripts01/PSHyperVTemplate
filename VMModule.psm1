@@ -6,11 +6,8 @@ function New-Vmachine {
         [Parameter(Mandatory = $false)] [string]$Name,
         [Parameter(Mandatory = $false)] [string]$ISO
     )
-
     # Vm Name
-    if ($Name) {
-        $VMName = $Name
-    }
+    if ($Name) { $VMName = $Name }
     else {
         # Name for a new VM (first available)
         $VMLastNumber = ((Get-Vm -Name "Win10*").Name | Measure-Object -Maximum).Count
