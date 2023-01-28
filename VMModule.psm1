@@ -79,3 +79,4 @@ function Remove-Vmachine {
         Unix { Write-Warning "Remove-Vmachine is available only in Win32NT environment.." }
     }
 }
+Export-ModuleMember -Function Remove-Vmachine
