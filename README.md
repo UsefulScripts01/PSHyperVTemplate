@@ -6,7 +6,7 @@ Copy the code from the area below and paste it into PowerShell Admin (or Windows
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VMModule.psm1" -OutFile "C:\Windows\Temp\VmModule.psm1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmModule.psm1" -OutFile "C:\Windows\Temp\VmModule.psm1"
 Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
 ```
 
@@ -39,5 +39,15 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 
 #### 4. Examples
 
+```powershell
+New-Vmachine -Generation 2 -Start
+```
 
+```powershell
+New-Vmachine -Generation 1
+```
+
+```powershell
+New-Vmachine -Generation 1 -Name Ubuntu -ISO "C:\ubuntu-amd64.iso"
+```
 
