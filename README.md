@@ -19,3 +19,20 @@ To install VMModule on your system follow these steps:
 - If you can't find the profile file, create a new one `New-Item -Path $profile -Type File -Force`
 - Edit file and insert command `Import-Module -Name "~\Documents\VmModule.psm1"`
 
+
+#### 3. Default settings for a new machine
+
+The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\VmModule.xml`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<NewVmachine>
+    <!-- New-VMachine deault parameters -->
+    <MemorySize>8</MemorySize><!-- values in GB -->
+    <VhdSize>100</VhdSize><!-- values in GB -->
+    <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath><!-- VHDX storage location -->
+    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO><!-- boot ISO location -->
+    <SecureBoot>1</SecureBoot><!-- switch 0/1 -->
+    <AutoCheckpoints>0</AutoCheckpoints><!-- switch 0/1 -->
+</NewVmachine>
+```
