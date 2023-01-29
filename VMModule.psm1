@@ -68,6 +68,7 @@ function Remove-Vmachine {
             if ((Get-VM).Name.Contains($Name)) {
                 $Vhdx = (Get-VMHardDiskDrive -VMName $Name).Path
                 Remove-VM -Name $Name
+                Start-Sleep -Seconds 2
                 Remove-Item -Path $Vhdx
             }
             else { Write-Warning "Machine $Name does not exist.." }
