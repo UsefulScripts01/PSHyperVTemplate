@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NewVmachine>
+    <!--Values in GB-->
+    <MemorySize>8</MemorySize>
+    <VhdSize>100</VhdSize>
+    <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath>
+    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO>
+</NewVmachine>
