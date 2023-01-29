@@ -59,6 +59,7 @@ function New-Vmachine {
 }
 Export-ModuleMember -Function New-Vmachine
 
+# DELETE HYPER-V MACHINE AND VHDX
 function Remove-Vmachine {
     param (
         [Parameter(Mandatory = $true)] [string]$Name
