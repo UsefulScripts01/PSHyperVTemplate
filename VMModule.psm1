@@ -7,11 +7,11 @@ function New-Vmachine {
         [Parameter()] [string]$Name,
         [Parameter()] [string]$ISO
     )
-    # verify that the VMModule.xml exist
-    if (!(Test-Path -Path "~\Documents\VMModule.xml")) {
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VMModule.xml" -OutFile "~\Documents\VMModule.xml"
+    # verify that the VmModule.xml exist
+    if (!(Test-Path -Path "~\Documents\VmModule.xml")) {
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmModule.xml" -OutFile "~\Documents\VmModule.xml"
     }
-    [XML]$Set = Get-Content -Path "~\Documents\VMModule.xml"
+    [XML]$Set = Get-Content -Path "~\Documents\VmModule.xml"
     
     # vm name
     if ($Name) { $VMName = $Name } # from parameter
