@@ -39,7 +39,7 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 
 #### 4. Parameters
 
-`-Generation` - [switch] Generation of a new machine \
+`-Generation` - [string] Generation of a new machine (1 or 2) \
 `-Start` - [switch] Start the machine after creation \
 `-Name` - [string] Name of a new machne (default is "VM_no") \
 `-ISO` - [string] Boot ISO file path
