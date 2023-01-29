@@ -24,7 +24,7 @@ function New-Vmachine {
 
     $RamSize = 1073741824*($Set.NewVmachine.MemorySize) # memory size to bytes
     $VhdSize = 1073741824*($Set.NewVmachine.VhdSize) # vhd size to bytes
-    $VhdPath = Join-Path -Path $Set.NewVmachine.VhdPath -ChildPath "$VMName.iso" # path from xml
+    $VhdPath = Join-Path -Path $Set.NewVmachine.VhdPath -ChildPath "$VMName.vhdx" # path from xml
 
     # boot ISO
     if ($ISO) { $VMBootISO = $ISO } # from parameter
