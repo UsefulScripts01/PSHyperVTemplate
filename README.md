@@ -54,3 +54,10 @@ New-Vmachine -Generation 1 -Name "MachineName" -ISO "C:\installation.iso"
 ```powershell
 Remove-Vmachine -Name "MachineName"
 ```
+
+#### 4. Parameters
+
+`-Generation` - [switch] Generarion ofa new machine
+`-Start` - [switch] Start the machine after creation
+`-Name` - [string] Name of a new machne (default is "VM_<no>")
+`-ISO` - [string] Boot ISO file path
