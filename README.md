@@ -48,6 +48,9 @@ New-Vmachine -Generation 1
 ```
 
 ```powershell
-New-Vmachine -Generation 1 -Name Ubuntu -ISO "C:\ubuntu-amd64.iso"
+New-Vmachine -Generation 1 -Name "MachineName" -ISO "C:\installation.iso"
 ```
 
+```powershell
+Remove-Vmachine -Name "MachineName"
+```
