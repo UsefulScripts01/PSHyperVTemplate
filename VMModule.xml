@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
-    <!--Values in GB-->
-    <MemorySize>8</MemorySize>
-    <VhdSize>100</VhdSize>
-    <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath>
-    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO>
+    <!-- New-VMachine deault parameters -->
+    <MemorySize>8</MemorySize><!-- values in GB -->
+    <VhdSize>100</VhdSize><!-- values in GB -->
+    <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath><!-- VHDX storage location -->
+    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO><!-- boot ISO location -->
+    <SecureBoot>1</SecureBoot><!-- switch 0/1 -->
+    <AutoCheckpoints>0</AutoCheckpoints><!-- switch 0/1 -->
 </NewVmachine>

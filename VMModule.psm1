@@ -22,8 +22,8 @@ function New-Vmachine {
         $VMName = "VM_$VMLastNumber"
     }
 
-    $RamSize = 1073741824*($Set.NewVmachine.MemorySize) # memory size to bytes
-    $VhdSize = 1073741824*($Set.NewVmachine.VhdSize) # vhd size to bytes
+    $RamSize = 1073741824 * ($Set.NewVmachine.MemorySize) # memory size to bytes
+    $VhdSize = 1073741824 * ($Set.NewVmachine.VhdSize) # vhd size to bytes
     $VhdPath = Join-Path -Path $Set.NewVmachine.VhdPath -ChildPath "$VMName.vhdx" # path from xml
 
     # boot ISO
@@ -59,9 +59,21 @@ function New-Vmachine {
             }
         }
     }
-    # setup a new VM
-    Set-VM -VMName $VMName -AutomaticCheckpointsEnabled $False
 
+    # secure boot
+    if ((Get-VM  -Name $VMName).Generation -eq "2") {
+        switch ($Set.NewVmachine.SecureBoot) {
+            0 { Set-VMFirmware -VMName $VMName -EnableSecureBoot OFF }
+            1 { Set-VMFirmware -VMName $VMName -EnableSecureBoot ON }
+        }
+    }
+
+    # automatic checkpoints
+    switch ($Set.NewVmachine.AutoCheckpoints) {
+        0 { Set-VM -VMName $VMName -AutomaticCheckpointsEnabled $false }
+        1 { Set-VM -VMName $VMName -AutomaticCheckpointsEnabled $true }
+    }
+    
     # "start" switch
     if ($Start) { Start-VM -Name $VMName }
 }
@@ -70,7 +82,7 @@ Export-ModuleMember -Function New-Vmachine
 # DELETE HYPER-V MACHINE AND VHDX
 function Remove-Vmachine {
     param (
-        [Parameter(Mandatory = $true)] [string]$Name
+        [Parameter(Mandatory)] [string]$Name
     )
     switch ([System.Environment]::OSVersion.Platform) {
         Win32NT {
