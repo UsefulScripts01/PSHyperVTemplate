@@ -47,18 +47,19 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 
 #### 5. Examples
 
+Example 1: Generation 2. Start after creation.
 ```powershell
 New-Vmachine -Generation 2 -Start
 ```
-
+Example 2: Generation 1.
 ```powershell
 New-Vmachine -Generation 1
 ```
-
+Example 3: Generation 1, boot from the ISO file defined in the parameter.
 ```powershell
 New-Vmachine -Generation 1 -Name "MachineName" -ISO "C:\installation.iso"
 ```
-
+Example 4: Remove selected machine.
 ```powershell
 Remove-Vmachine -Name "MachineName"
 ```
