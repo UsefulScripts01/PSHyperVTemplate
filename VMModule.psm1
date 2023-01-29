@@ -1,60 +1,67 @@
+
 # NEW HYPER-V MACHINE
 function New-Vmachine {
     param (
-        [Parameter(Mandatory = $false)] [switch]$Start,
-        [Parameter(Mandatory = $true)] [string]$Generation,
-        [Parameter(Mandatory = $false)] [string]$Name,
-        [Parameter(Mandatory = $false)] [string]$ISO
+        [Parameter(Mandatory)] [string]$Generation,
+        [Parameter()] [switch]$Start,
+        [Parameter()] [string]$Name,
+        [Parameter()] [string]$ISO
     )
-    # Vm Name
-    if ($Name) { $VMName = $Name }
+    # verify that the VMModule.xml exist
+    if (!(Test-Path -Path "~\Documents\VMModule.xml")) {
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VMModule.xml" -OutFile "~\Documents\VMModule.xml"
+    }
+    [XML]$Set = Get-Content -Path "~\Documents\VMModule.xml"
+    
+    # vm name
+    if ($Name) { $VMName = $Name } # from parameter
     else {
         # Name for a new VM (first available)
-        $VMLastNumber = ((Get-Vm -Name "Win10*").Name | Measure-Object -Maximum).Count
+        $VMLastNumber = ((Get-Vm -Name "VM*").Name | Measure-Object -Maximum).Count
         $VMLastNumber ++
         $VMName = "VM_$VMLastNumber"
     }
 
-    # BOOT ISO
-    if ($ISO) { $VMBootPath = $ISO } # From parameter
-    else { $VMBootPath = Get-ChildItem -Path "C:\MDT\Boot\*.iso" } # Default
+    $RamSize = 1073741824*($Set.NewVmachine.MemorySize) # memory size to bytes
+    $VhdSize = 1073741824*($Set.NewVmachine.VhdSize) # vhd size to bytes
 
-    # VHDX
-    $VhdxPath = "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks"
+    # boot ISO
+    if ($ISO) { $VMBootISO = $ISO } # from parameter
+    else { $VMBootISO = $Set.NewVmachine.ISO } # from XML
 
-    # Switch for the "Generation" parameter
+    # switch for the "Generation" parameter
     Switch ($Generation) {
         "1" {
-            # Create VM - Generation 1
-            # Script wil attach the existing VHDX (with the same name as VM) instead of creating a new one
-            if (!(Test-Path -Path "$VhdxPath\$VMName.vhdx")) {
-                New-VM -Name "$VMName" -Generation 1 -MemoryStartupBytes 8GB -NewVHDPath "$Vhdxpath\$VMName.vhdx" -NewVHDSizeBytes 100GB -SwitchName "Default Switch" -BootDevice CD
+            # create VM - generation 1
+            # script wil attach the existing VHDX (with the same name as VM) instead of creating a new one
+            if (!(Test-Path -Path "$Set.NewVmachine.VhdPath\$VMName.vhdx")) {
+                New-VM -Name "$VMName" -Generation 1 -MemoryStartupBytes $RamSize -NewVHDPath "$Set.NewVmachine.VhdPath\$VMName.vhdx" -NewVHDSizeBytes $VhdSize -SwitchName "Default Switch" -BootDevice CD
             }
             else {
-                New-VM -Name $VMName -Generation 1 -MemoryStartupBytes 8GB -SwitchName "Default Switch" -VHDPath "$Vhdxpath\$VMName.vhdx" -BootDevice CD
+                New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -SwitchName "Default Switch" -VHDPath "$Set.NewVmachine.VhdPath\$VMName.vhdx" -BootDevice CD
             }
-            Set-VMDvdDrive -VMName $VMName -Path $VMBootPath
+            Set-VMDvdDrive -VMName $VMName -Path $VMBootISO
         }
         "2" {
-            # Create VM - Generation 2
-            if (!(Test-Path -Path "$VhdxPath\$VMName.vhdx")) {
-                New-VM -Name $VMName -Generation 2 -MemoryStartupBytes 8GB -NewVHDPath "$Vhdxpath\$VMName.vhdx" -NewVHDSizeBytes 100GB -SwitchName "Default Switch"
-                Add-VMDvdDrive -VMName $VMName -Path $VMBootPath
+            # create VM - generation 2
+            if (!(Test-Path -Path "$Set.NewVmachine.VhdPath\$VMName.vhdx")) {
+                New-VM -Name $VMName -Generation 2 -MemoryStartupBytes $RamSize -NewVHDPath "$Set.NewVmachine.VhdPath\$VMName.vhdx" -NewVHDSizeBytes $VhdSize -SwitchName "Default Switch"
+                Add-VMDvdDrive -VMName $VMName -Path $VMBootISO
                 $DVD = Get-VMDVDDrive -VMName $VMName
                 Set-VMFirmware $VMName -FirstBootDevice $DVD
             }
             else {
-                New-VM -Name $VMName -Generation 2 -MemoryStartupBytes 8GB -VHDPath "$Vhdxpath\$VMName.vhdx" -SwitchName "Default Switch"
-                Add-VMDvdDrive -VMName $VMName -Path $VMBootPath
+                New-VM -Name $VMName -Generation 2 -MemoryStartupBytes $RamSize -VHDPath "$Set.NewVmachine.VhdPath\$VMName.vhdx" -SwitchName "Default Switch"
+                Add-VMDvdDrive -VMName $VMName -Path $VMBootISO
                 $DVD = Get-VMDVDDrive -VMName $VMName
                 Set-VMFirmware $VMName -FirstBootDevice $DVD
             }
         }
     }
-    # Setup a new VM
+    # setup a new VM
     Set-VM -VMName $VMName -AutomaticCheckpointsEnabled $False
 
-    # "START" switch
+    # "start" switch
     if ($Start) { Start-VM -Name $VMName }
 }
 Export-ModuleMember -Function New-Vmachine
