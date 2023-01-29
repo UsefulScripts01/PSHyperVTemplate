@@ -36,3 +36,8 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
     <AutoCheckpoints>0</AutoCheckpoints><!-- switch 0/1 -->
 </NewVmachine>
 ```
+
+#### 4. Examples
+
+
+
