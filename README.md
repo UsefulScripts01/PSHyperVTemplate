@@ -1,6 +1,6 @@
 ## VmModule
 
-#### 1. Load only incurrent session
+#### 1. Load in current session
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
@@ -11,7 +11,7 @@ Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
 ```
 
 
-#### 2. Permanent installation
+#### 2. Installation
 
 To install VMModule on your system follow these steps:
 - Download VmModule.ps1 to `.\Documents\WindowsPowerShell\` or any other location
