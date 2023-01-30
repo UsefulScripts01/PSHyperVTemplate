@@ -35,12 +35,8 @@ function New-Vmachine {
         "1" {
             # create VM - generation 1
             # script wil attach the existing VHDX (with the same name as VM) instead of creating a new one
-            if (!(Test-Path -Path $VhdPath)) {
-                New-VM -Name "$VMName" -Generation 1 -MemoryStartupBytes $RamSize -NewVHDPath $VhdPath -NewVHDSizeBytes $VhdSize -BootDevice CD
-            }
-            else {
-                New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -VHDPath $VhdPath -BootDevice CD
-            }
+            if (!(Test-Path -Path $VhdPath)) { New-VM -Name "$VMName" -Generation 1 -MemoryStartupBytes $RamSize -NewVHDPath $VhdPath -NewVHDSizeBytes $VhdSize -BootDevice CD }
+            else { New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -VHDPath $VhdPath -BootDevice CD }
             Set-VMDvdDrive -VMName $VMName -Path $VMBootISO
         }
         "2" {
