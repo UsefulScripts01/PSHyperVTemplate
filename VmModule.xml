@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
     <!-- New-VMachine deault parameters -->
+    <DefaultName>VM_</DefaultName>
     <MemorySize>8</MemorySize><!-- values in GB -->
     <VhdSize>100</VhdSize><!-- values in GB -->
     <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath><!-- VHDX storage location -->
