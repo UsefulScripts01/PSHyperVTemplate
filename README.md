@@ -27,13 +27,24 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
-    <!-- New-VMachine deault parameters -->
-    <MemorySize>8</MemorySize><!-- values in GB -->
-    <VhdSize>100</VhdSize><!-- values in GB -->
-    <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath><!-- VHDX storage location -->
-    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO><!-- boot ISO location -->
-    <SecureBoot>1</SecureBoot><!-- switch 0/1 -->
-    <AutoCheckpoints>0</AutoCheckpoints><!-- switch 0/1 -->
+    <Name>VM_</Name>
+    <Memory>
+        <Size>8</Size><Minimum>1</Minimum><Maximum>16</Maximum>
+    </Memory>
+    <CPU>
+        <Count>4</Count><MigrateToPhysical>1</MigrateToPhysical>
+    </CPU>
+    <HardDrive>
+        <Size>100</Size><Path>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</Path>
+    </HardDrive>
+    <DVD>
+        <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO>
+    </DVD>
+    <Network>
+        <VirtualSwitch>Default Switch</VirtualSwitch>
+    </Network>
+    <SecureBoot>1</SecureBoot>
+    <AutoCheckpoints>0</AutoCheckpoints>
 </NewVmachine>
 ```
 
