@@ -2,17 +2,13 @@
 <NewVmachine>
     <Name>VM_</Name>
     <Memory>
-        <Size>8</Size>
-        <Minimum>1</Minimum>
-        <Maximum>16</Maximum>
+        <Size>8</Size><Minimum>1</Minimum><Maximum>16</Maximum>
     </Memory>
     <CPU>
-        <Count>4</Count>
-        <MigrateToPhysical>1</MigrateToPhysical>
+        <Count>4</Count><MigrateToPhysical>1</MigrateToPhysical>
     </CPU>
     <HardDrive>
-        <Size>100</Size>
-        <Path>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</Path>
+        <Size>100</Size><Path>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</Path>
     </HardDrive>
     <DVD>
         <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO>
