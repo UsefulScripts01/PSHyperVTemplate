@@ -17,7 +17,7 @@ function New-Vmachine {
     if ($Name) { $VMName = $Name } # from parameter
     else {
         # Name for a new VM (first available)
-        $VMLastNumber = ((Get-Vm -Name "VM*").Name | Measure-Object -Maximum).Count
+        $VMLastNumber = ((Get-Vm -Name "$Set.NewVmachine.DefaultName*").Name | Measure-Object -Maximum).Count
         $VMLastNumber ++
         $VMName = "VM_$VMLastNumber"
     }
@@ -68,14 +68,38 @@ function New-Vmachine {
         }
     }
 
+    # memory
+    $MemorySize = 1073741824 * ($Set.NewVmachine.MemorySize)
+    $MinimumRAM = 1073741824 * ($Set.NewVmachine.MinimumRAM)
+    $MaximumRAM = 1073741824 * ($Set.NewVmachine.MaximumRAM)
+    Set-VMMemory $VMName -DynamicMemoryEnabled $true -MinimumBytes $MinimumRAM -StartupBytes $MemorySize -MaximumBytes $MaximumRAM -Priority 80 -Buffer 20
+
+    # processor
+    switch ($Set.NewVmachine.MigrateToPhysical) {
+        0 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.NumberOfCPU -CompatibilityForMigrationEnabled $false }
+        1 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.NumberOfCPU -CompatibilityForMigrationEnabled $true }
+    }
+
     # automatic checkpoints
     switch ($Set.NewVmachine.AutoCheckpoints) {
         0 { Set-VM -VMName $VMName -AutomaticCheckpointsEnabled $false }
         1 { Set-VM -VMName $VMName -AutomaticCheckpointsEnabled $true }
     }
     
+    # network
+    $NetAdapter = (Get-VMNetworkAdapter -VMName $VMName).Name
+    Connect-VMNetworkAdapter -VMName $VMName -Name $NetAdapter -SwitchName $Set.NewVmachine.VirtualSwitch
+
     # "start" switch
     if ($Start) { Start-VM -Name $VMName }
+
+    # Collected error log will be used in FinishProcess.ps1 (Get-ErrorLog)
+    if (!$Error.Count.Equals(0)) {
+        $DateTime = Get-Date -Format "dd.MM.yyyy HH:mm"
+        foreach ($Entry in $Error) {
+            Add-Content -Value "$DateTime - $VMName - $Entry" -Path "~\Desktop\VM-ErrorLog.log" -Force
+        }
+    }
 }
 Export-ModuleMember -Function New-Vmachine
 

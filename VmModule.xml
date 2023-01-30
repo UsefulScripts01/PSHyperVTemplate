@@ -2,10 +2,27 @@
 <NewVmachine>
     <!-- New-VMachine deault parameters -->
     <DefaultName>VM_</DefaultName>
-    <MemorySize>8</MemorySize><!-- values in GB -->
-    <VhdSize>100</VhdSize><!-- values in GB -->
+    
+    <!-- MEMORY - values in GB -->
+    <MemorySize>8</MemorySize>
+    <MinimumRAM>1</MinimumRAM>
+    <MaximumRAM>16</MaximumRAM>
+
+    <!-- PROCESSOR -->
+    <NumberOfCPU>4</NumberOfCPU>
+    <MigrateToPhysical>1</MigrateToPhysical>
+
+    <!-- VHDX - values in GB -->
+    <VhdSize>100</VhdSize>
     <VhdPath>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</VhdPath><!-- VHDX storage location -->
-    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO><!-- boot ISO location -->
+    
+    <!-- BOOT ISO location -->
+    <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO>
     <SecureBoot>1</SecureBoot><!-- switch 0/1 -->
+
+    <!-- NETWORK -->
+    <VirtualSwitch>Default Switch</VirtualSwitch>
+
+    <!-- OTHER -->
     <AutoCheckpoints>0</AutoCheckpoints><!-- switch 0/1 -->
 </NewVmachine>
