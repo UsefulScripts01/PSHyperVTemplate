@@ -17,18 +17,18 @@ function New-Vmachine {
     if ($Name) { $VMName = $Name } # from parameter
     else {
         # Name for a new VM (first available)
-        $VMLastNumber = ((Get-Vm -Name "$Set.NewVmachine.DefaultName*").Name | Measure-Object -Maximum).Count
+        $VMLastNumber = ((Get-Vm -Name "$Set.NewVmachine.Name*").Name | Measure-Object -Maximum).Count
         $VMLastNumber ++
         $VMName = "VM_$VMLastNumber"
     }
 
-    $RamSize = 1073741824 * ($Set.NewVmachine.MemorySize) # memory size to bytes
-    $VhdSize = 1073741824 * ($Set.NewVmachine.VhdSize) # vhd size to bytes
-    $VhdPath = Join-Path -Path $Set.NewVmachine.VhdPath -ChildPath "$VMName.vhdx" # path from xml
+    $RamSize = 1073741824 * ($Set.NewVmachine.Memory.Size) # memory size to bytes
+    $VhdSize = 1073741824 * ($Set.NewVmachine.HardDrive.Size) # vhd size to bytes
+    $VhdPath = Join-Path -Path $Set.NewVmachine.HardDrive.Path -ChildPath "$VMName.vhdx" # path from xml
 
     # boot ISO
     if ($ISO) { $VMBootISO = $ISO } # from parameter
-    else { $VMBootISO = $Set.NewVmachine.ISO } # from XML
+    else { $VMBootISO = $Set.NewVmachine.DVD.ISO } # from XML
 
     # switch for the "Generation" parameter
     Switch ($Generation) {
@@ -69,15 +69,15 @@ function New-Vmachine {
     }
 
     # memory
-    $MemorySize = 1073741824 * ($Set.NewVmachine.MemorySize)
-    $MinimumRAM = 1073741824 * ($Set.NewVmachine.MinimumRAM)
-    $MaximumRAM = 1073741824 * ($Set.NewVmachine.MaximumRAM)
+    $MemorySize = 1073741824 * ($Set.NewVmachine.Memory.Size)
+    $MinimumRAM = 1073741824 * ($Set.NewVmachine.Memory.Minimum)
+    $MaximumRAM = 1073741824 * ($Set.NewVmachine.Memory.Maximum)
     Set-VMMemory $VMName -DynamicMemoryEnabled $true -MinimumBytes $MinimumRAM -StartupBytes $MemorySize -MaximumBytes $MaximumRAM -Priority 80 -Buffer 20
 
     # processor
-    switch ($Set.NewVmachine.MigrateToPhysical) {
-        0 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.NumberOfCPU -CompatibilityForMigrationEnabled $false }
-        1 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.NumberOfCPU -CompatibilityForMigrationEnabled $true }
+    switch ($Set.NewVmachine.CPU.MigrateToPhysical) {
+        0 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.CPU.Count -CompatibilityForMigrationEnabled $false }
+        1 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.CPU.Count -CompatibilityForMigrationEnabled $true }
     }
 
     # automatic checkpoints
@@ -88,7 +88,7 @@ function New-Vmachine {
     
     # network
     $NetAdapter = (Get-VMNetworkAdapter -VMName $VMName).Name
-    Connect-VMNetworkAdapter -VMName $VMName -Name $NetAdapter -SwitchName $Set.NewVmachine.VirtualSwitch
+    Connect-VMNetworkAdapter -VMName $VMName -Name $NetAdapter -SwitchName $Set.NewVmachine.Network.VirtualSwitch
 
     # "start" switch
     if ($Start) { Start-VM -Name $VMName }
