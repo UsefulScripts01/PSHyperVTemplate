@@ -10,10 +10,10 @@ function New-Vmachine {
     $Env = [System.Environment]::OSVersion.Platform
     if ($Env -match "Win32NT") {
         # verify that the VmModule.xml exist
-        if (!(Test-Path -Path "~\Documents\WindowsPowerShell\VmModule.xml")) {
-            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmModule.xml" -OutFile "~\Documents\WindowsPowerShell\VmModule.xml"
+        if (!(Test-Path -Path "~\Desktop\VmTemplate.xml")) {
+            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmTemplate.xml" -OutFile "~\Desktop\VmTemplate.xml"
         }
-        [XML]$Set = Get-Content -Path "~\Documents\WindowsPowerShell\VmModule.xml"
+        [XML]$Set = Get-Content -Path "~\Desktop\VmTemplate.xml"
 	
         # VM name from parameter
         if ($Name) {
