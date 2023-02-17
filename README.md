@@ -55,7 +55,7 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 
 #### 4. Parameters
 
-You can define your own parameters or use the predefined ones from the VmTemplate.xml file.
+You can define your own parameter values or use the predefined ones from the VmTemplate.xml file.
 
 `-Generation` - [string] Generation of a new machine (1 or 2, default is 2) \
 `-Start` - [switch] Start the machine after creation \
