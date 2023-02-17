@@ -34,34 +34,22 @@ function New-Vmachine {
         $VhdPath = Join-Path -Path $Set.NewVmachine.HardDrive.Path -ChildPath "$VMName.vhdx" # path from xml
 
         # boot ISO
-        if ($ISO) {
-            $VMBootISO = $ISO
-        }
-        else {
-            $VMBootISO = $Set.NewVmachine.DVD.ISO
-        }
+        if ($ISO) { $VMBootISO = $ISO }
+        else { $VMBootISO = $Set.NewVmachine.DVD.ISO }
 
         # switch for the "Generation" parameter
         Switch ($Generation) {
             1 {
                 # create VM - generation 1
                 # script wil attach the existing VHDX (with the same name as VM) instead of creating a new one
-                if (!(Test-Path -Path $VhdPath)) {
-                    New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -NewVHDPath $VhdPath -NewVHDSizeBytes $VhdSize -BootDevice CD
-                }
-                else {
-                    New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -VHDPath $VhdPath -BootDevice CD
-                }
+                if (!(Test-Path -Path $VhdPath)) { New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -NewVHDPath $VhdPath -NewVHDSizeBytes $VhdSize -BootDevice CD }
+                else { New-VM -Name $VMName -Generation 1 -MemoryStartupBytes $RamSize -VHDPath $VhdPath -BootDevice CD }
                 Set-VMDvdDrive -VMName $VMName -Path $VMBootISO
             }
             2 {
                 # create VM - generation 2
-                if (!(Test-Path -Path $VhdPath)) {
-                    New-VM -Name $VMName -Generation 2 -MemoryStartupBytes $RamSize -NewVHDPath $VhdPath -NewVHDSizeBytes $VhdSize
-                }
-                else {
-                    New-VM -Name $VMName -Generation 2 -MemoryStartupBytes $RamSize -VHDPath $VhdPath
-                }
+                if (!(Test-Path -Path $VhdPath)) { New-VM -Name $VMName -Generation 2 -MemoryStartupBytes $RamSize -NewVHDPath $VhdPath -NewVHDSizeBytes $VhdSize }
+                else { New-VM -Name $VMName -Generation 2 -MemoryStartupBytes $RamSize -VHDPath $VhdPath }
                 Add-VMDvdDrive -VMName $VMName -Path $VMBootISO
                 $DVD = Get-VMDVDDrive -VMName $VMName
                 Set-VMFirmware $VMName -FirstBootDevice $DVD
