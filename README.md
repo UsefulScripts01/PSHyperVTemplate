@@ -63,7 +63,7 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 
 #### 5. Examples
 
-Example 1: Quick creation from the xml template
+Example 1: Simple, all parameters from the xml template.
 ```powershell
 New-Vmachine
 ```
