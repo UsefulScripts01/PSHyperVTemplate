@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
     <Name>VM_</Name>
+    <Generation>2</Generation>
     <Memory>
         <Size>8</Size>
         <Minimum>1</Minimum>
