@@ -2,6 +2,7 @@
 <NewVmachine>
     <Name>VM_</Name>
     <Generation>2</Generation>
+    <SecureBoot>0</SecureBoot>
     <Memory>
         <Size>8</Size>
         <Minimum>1</Minimum>
@@ -21,6 +22,5 @@
     <Network>
         <VirtualSwitch>Default Switch</VirtualSwitch>
     </Network>
-    <SecureBoot>0</SecureBoot>
     <AutoCheckpoints>0</AutoCheckpoints>
 </NewVmachine>

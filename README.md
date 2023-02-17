@@ -28,6 +28,8 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
     <Name>VM_</Name>
+    <Generation>2</Generation>
+    <SecureBoot>0</SecureBoot>
     <Memory>
         <Size>8</Size>
         <Minimum>1</Minimum>
@@ -47,14 +49,13 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
     <Network>
         <VirtualSwitch>Default Switch</VirtualSwitch>
     </Network>
-    <SecureBoot>1</SecureBoot>
     <AutoCheckpoints>0</AutoCheckpoints>
 </NewVmachine>
 ```
 
 #### 4. Parameters
 
-`-Generation` - [string] Generation of a new machine (1 or 2) \
+`-Generation` - [string] Generation of a new machine (1 or 2, default is 2) \
 `-Start` - [switch] Start the machine after creation \
 `-Name` - [string] Name of a new machne (default is "VM_no") \
 `-ISO` - [string] Boot ISO file path
@@ -78,4 +79,3 @@ Example 4: Remove selected machine.
 ```powershell
 Remove-Vmachine -Name "MachineName"
 ```
-
