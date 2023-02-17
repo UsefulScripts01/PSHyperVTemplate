@@ -87,9 +87,7 @@ function New-Vmachine {
         Connect-VMNetworkAdapter -VMName $VMName -Name $NetAdapter -SwitchName $Set.NewVmachine.Network.VirtualSwitch
 
         # "start" switch
-        if ($Start) {
-            Start-VM -Name $VMName
-        }
+        if ($Start) { Start-VM -Name $VMName }
 
         # Collected error log will be used in FinishProcess.ps1 (Get-ErrorLog)
         if (!$Error.Count.Equals(0)) {
@@ -100,9 +98,7 @@ function New-Vmachine {
         }
 
     }
-    else {
-        Write-Warning "New-Vmachine is available only in Win32NT environment.."
-    }
+    else { Write-Warning "New-Vmachine is available only in Win32NT environment.." }
 }
 Export-ModuleMember -Function New-Vmachine
 
