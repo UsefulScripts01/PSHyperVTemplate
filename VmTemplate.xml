@@ -20,6 +20,6 @@
     <Network>
         <VirtualSwitch>Default Switch</VirtualSwitch>
     </Network>
-    <SecureBoot>1</SecureBoot>
+    <SecureBoot>0</SecureBoot>
     <AutoCheckpoints>0</AutoCheckpoints>
 </NewVmachine>
