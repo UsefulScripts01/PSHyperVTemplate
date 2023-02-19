@@ -26,7 +26,7 @@ function New-Vmachine {
             $AutoName = $Set.NewVmachine.Name
             $VMLastNumber = ((Get-Vm -Name $AutoName*).Name | Measure-Object -Maximum).Count
             $VMLastNumber ++
-            $VMName = "VM_$VMLastNumber"
+            $VMName = "${AutoName}${VMLastNumber}"
         }
 
         $RamSize = 1073741824 * ($Set.NewVmachine.Memory.Size) # memory size to bytes
