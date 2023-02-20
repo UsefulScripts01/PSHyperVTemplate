@@ -17,9 +17,6 @@ function New-Vmachine {
         # import te,mplate xml
         [XML]$Set = Get-Content -Path "~\Desktop\VmTemplate.xml"
 
-        # Generation
-        if (!$Generation) { $Generation = $Set.NewVmachine.Generation }
-
         # VM name
         if ($Name) { $VMName = $Name }
         else {
@@ -37,7 +34,8 @@ function New-Vmachine {
         if ($ISO) { $VMBootISO = $ISO }
         else { $VMBootISO = $Set.NewVmachine.DVD.ISO }
 
-        # switch for the "Generation" parameter
+        # Generation
+        if (!$Generation) { $Generation = $Set.NewVmachine.Generation }
         Switch ($Generation) {
             1 {
                 # create VM - generation 1
