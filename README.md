@@ -22,7 +22,7 @@ To install VMModule on your system follow these steps:
 
 #### 3. Default settings for a new machine
 
-The default settings for a new VM are stored in `.\Desktop\VmModule.xml`
+The default settings for a new VM are stored in `.\Desktop\VmTemplate.xml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
