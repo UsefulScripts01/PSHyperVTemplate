@@ -41,7 +41,7 @@ The default settings for a new VM are stored in `.\Documents\WindowsPowerShell\V
     </CPU>
     <HardDrive>
         <Size>100</Size>
-        <Path>C:\ProgramData\Microsoft\Windows\Virtual Hard Disks</Path>
+        <Path>C:\Users\Public\Documents\Hyper-V\Virtual hard disks\</Path>
     </HardDrive>
     <DVD>
         <ISO>C:\MDT\Boot\LiteTouchPE_x64.iso</ISO>
