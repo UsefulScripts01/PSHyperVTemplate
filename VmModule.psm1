@@ -34,7 +34,7 @@ function New-Vmachine {
         if ($ISO) { $VMBootISO = $ISO }
         else { $VMBootISO = $Set.NewVmachine.DVD.ISO }
 
-        # Generation
+        # generation
         if (!$Generation) { $Generation = $Set.NewVmachine.Generation }
         Switch ($Generation) {
             1 {
@@ -54,6 +54,8 @@ function New-Vmachine {
             }
         }
 
+
+        # CHANGE SETTINGS ON AN EXISTING MACHINE
         # secure boot
         if ((Get-VM  -Name $VMName).Generation -eq "2") {
             switch ($Set.NewVmachine.SecureBoot) {
