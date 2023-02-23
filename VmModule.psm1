@@ -5,7 +5,8 @@ function New-Vmachine {
         [Parameter(Mandatory = $false)][string]$Generation,
         [Parameter(Mandatory = $false)][switch]$Start,
         [Parameter(Mandatory = $false)][string]$Name,
-        [Parameter(Mandatory = $false)][string]$ISO
+        [Parameter(Mandatory = $false)][string]$ISO,
+        [Parameter(Mandatory = $false)][switch]$RunManager
     )
     $Env = [System.Environment]::OSVersion.Platform
     if ($Env -match "Win32NT") {
@@ -88,6 +89,15 @@ function New-Vmachine {
 
         # "start" switch
         if ($Start) { Start-VM -Name $VMName }
+
+        # automatic run hyper-v manager
+        if ($RunManager) { Start-Process -FilePath "virtmgmt.msc" }
+        if (!$RunManager) {
+            switch ($Set.NewVmachine.AutoRunManager) {
+                0 { }
+                1 { Start-Process -FilePath "virtmgmt.msc" }
+            }
+        }
 
         # Collected error log will be used in FinishProcess.ps1 (Get-ErrorLog)
         if (!$Error.Count.Equals(0)) {

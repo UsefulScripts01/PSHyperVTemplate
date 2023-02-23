@@ -23,4 +23,5 @@
         <VirtualSwitch>Default Switch</VirtualSwitch>
     </Network>
     <AutoCheckpoints>0</AutoCheckpoints>
+    <AutoRunManager>1</AutoRunManager>
 </NewVmachine>
