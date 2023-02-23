@@ -63,6 +63,7 @@ You can define your own parameter values or use the predefined ones from the VmT
 `-Start` - [switch] Start the machine after creation \
 `-Name` - [string] Name of a new machne (default is "VM_no") \
 `-ISO` - [string] Boot ISO file path
+'-RunManager' - [switch] Run Hyper-V Manager
 
 
 #### 5. Examples
