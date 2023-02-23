@@ -20,7 +20,7 @@ function New-Vmachine {
 
         # VM name
         if ($Name) { $VMName = $Name }
-        else {
+        if (!$Name) {
             $AutoName = $Set.NewVmachine.Name
             $VMLastNumber = ((Get-Vm -Name $AutoName*).Name | Measure-Object -Maximum).Count
             $VMLastNumber ++
@@ -33,7 +33,7 @@ function New-Vmachine {
 
         # boot ISO
         if ($ISO) { $VMBootISO = $ISO }
-        else { $VMBootISO = $Set.NewVmachine.DVD.ISO }
+        if (!$ISO) { $VMBootISO = $Set.NewVmachine.DVD.ISO }
 
         # generation
         if (!$Generation) { $Generation = $Set.NewVmachine.Generation }
@@ -89,6 +89,12 @@ function New-Vmachine {
 
         # "start" switch
         if ($Start) { Start-VM -Name $VMName }
+        if (!$Start) {
+            switch ($Set.NewVmachine.AutoStart) {
+                0 { }
+                1 { Start-VM -Name $VMName }
+            }
+        }
 
         # automatic run hyper-v manager
         if ($RunManager) { Start-Process -FilePath "virtmgmt.msc" }

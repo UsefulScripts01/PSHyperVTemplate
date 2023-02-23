@@ -49,7 +49,9 @@ The default settings for a new VM are stored in `.\Desktop\VmTemplate.xml`
     <Network>
         <VirtualSwitch>Default Switch</VirtualSwitch>
     </Network>
+    <AutoStart>0</AutoStart>
     <AutoCheckpoints>0</AutoCheckpoints>
+    <AutoRunManager>0</AutoRunManager>
 </NewVmachine>
 ```
 
