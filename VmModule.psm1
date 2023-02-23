@@ -2,10 +2,10 @@
 # NEW HYPER-V MACHINE
 function New-Vmachine {
     param (
-        [Parameter()] [string]$Generation,
-        [Parameter()] [switch]$Start,
-        [Parameter()] [string]$Name,
-        [Parameter()] [string]$ISO
+        [Parameter(Mandatory = $false)][string]$Generation,
+        [Parameter(Mandatory = $false)][switch]$Start,
+        [Parameter(Mandatory = $false)][string]$Name,
+        [Parameter(Mandatory = $false)][string]$ISO
     )
     $Env = [System.Environment]::OSVersion.Platform
     if ($Env -match "Win32NT") {
@@ -103,7 +103,7 @@ Export-ModuleMember -Function New-Vmachine
 # DELETE HYPER-V MACHINE AND VHDX
 function Remove-Vmachine {
     param (
-        [Parameter(Mandatory)] [string]$Name
+        [Parameter(Mandatory = $true)][string]$Name
     )
     switch ([System.Environment]::OSVersion.Platform) {
         Win32NT {
