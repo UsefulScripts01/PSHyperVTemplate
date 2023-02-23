@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
-    <Name>VM_</Name>
+    <Name>VM</Name>
     <Generation>2</Generation>
     <SecureBoot>0</SecureBoot>
     <Memory>
