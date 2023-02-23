@@ -27,7 +27,7 @@ The default settings for a new VM are stored in `.\Desktop\VmTemplate.xml`
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <NewVmachine>
-    <Name>VM_</Name>
+    <Name>VM</Name>
     <Generation>2</Generation>
     <SecureBoot>0</SecureBoot>
     <Memory>
