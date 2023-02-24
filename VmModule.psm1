@@ -27,7 +27,11 @@ function New-Vmachine {
             $VMName = "${AutoName}${VMLastNumber}"
         }
 
-        $RamSize = 1073741824 * ($Set.NewVmachine.Memory.Size) # memory size to bytes
+        # memory
+        $RamSize = 1073741824 * ($Set.NewVmachine.Memory.Size)
+        $MinimumRAM = 1073741824 * ($Set.NewVmachine.Memory.Minimum)
+        $MaximumRAM = 1073741824 * ($Set.NewVmachine.Memory.Maximum)
+
         $VhdSize = 1073741824 * ($Set.NewVmachine.HardDrive.Size) # vhd size to bytes
         $VhdPath = Join-Path -Path $Set.NewVmachine.HardDrive.Path -ChildPath "$VMName.vhdx" # path from xml
 
@@ -54,8 +58,7 @@ function New-Vmachine {
                 Set-VMFirmware $VMName -FirstBootDevice $DVD
             }
         }
-
-
+        
         # CHANGE SETTINGS ON AN EXISTING MACHINE
         # secure boot
         if ((Get-VM  -Name $VMName).Generation -eq "2") {
@@ -65,17 +68,14 @@ function New-Vmachine {
             }
         }
 
-        # memory
-        $MemorySize = 1073741824 * ($Set.NewVmachine.Memory.Size)
-        $MinimumRAM = 1073741824 * ($Set.NewVmachine.Memory.Minimum)
-        $MaximumRAM = 1073741824 * ($Set.NewVmachine.Memory.Maximum)
-        Set-VMMemory $VMName -DynamicMemoryEnabled $true -MinimumBytes $MinimumRAM -StartupBytes $MemorySize -MaximumBytes $MaximumRAM -Priority 80 -Buffer 20
-
         # processor
         switch ($Set.NewVmachine.CPU.MigrateToPhysical) {
             0 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.CPU.Count -CompatibilityForMigrationEnabled $false }
             1 { Set-VMProcessor -VMName $VMName -Count $Set.NewVmachine.CPU.Count -CompatibilityForMigrationEnabled $true }
         }
+
+        # min/max ram size
+        Set-VMMemory $VMName -DynamicMemoryEnabled $true -MinimumBytes $MinimumRAM -StartupBytes $RamSize -MaximumBytes $MaximumRAM -Priority 80 -Buffer 20
 
         # automatic checkpoints
         switch ($Set.NewVmachine.AutoCheckpoints) {
