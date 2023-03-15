@@ -2,6 +2,7 @@
 # NEW HYPER-V MACHINE
 function New-Vmachine {
     param (
+        [Parameter(Mandatory = $false)][string]$Template,
         [Parameter(Mandatory = $false)][string]$Generation,
         [Parameter(Mandatory = $false)][switch]$Start,
         [Parameter(Mandatory = $false)][string]$Name,
@@ -11,12 +12,12 @@ function New-Vmachine {
     $Env = [System.Environment]::OSVersion.Platform
     if ($Env -match "Win32NT") {
         # verify that the VmModule.xml exist
-        if (!(Test-Path -Path "~\Desktop\VmTemplate.xml")) {
-            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmTemplate.xml" -OutFile "~\Desktop\VmTemplate.xml"
-        }
+        if (!(Test-Path -Path "C:\Temp\VmTemplates")) { New-Item -Path "C:\Temp\VmTemplates" -ItemType Directory }
+        if (!(Test-Path -Path "C:\Temp\VmTemplates\DefaultTemplate.xml")) { Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/DefaultTemplate.xml" -OutFile "C:\Temp\VmTemplates\DefaultTemplate.xml" }
 
-        # import te,mplate xml
-        [XML]$Set = Get-Content -Path "~\Desktop\VmTemplate.xml"
+        # import template xml
+        if ($Template) { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\${Template}.xml" }
+        else { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\DefaultTemplate.xml" }
 
         # VM name
         if ($Name) { $VMName = $Name }
