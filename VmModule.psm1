@@ -17,14 +17,16 @@ function New-Vmachine {
 
         # templates
         if ($Template) {
-            if (!$Template.Contains(".xml")) { $Template = "${Template}.xml" } # add .xml
+            if ($Template -notmatch ".xml") { $Template = "${Template}.xml" } # add .xml
             $TemplatesList = Get-ChildItem -Path "C:\Temp\VmTemplates\"
-            if ($TemplatesList.Name.Contains($Template)) { [XML]$Set = Get-Content -Path "C:\Temp\VmTemplates\$Template" }
-            else { Write-Warning "$Template file not found.." }
+            if ($TemplatesList.Name -contains $Template) { [XML]$Set = Get-Content -Path "C:\Temp\VmTemplates\$Template" }
+            else {
+                Get-ChildItem -Path "C:\Temp\VmTemplates\"
+                Write-Warning "$Template file not found.."
+                break
+            }
         }
-        else {
-            [XML]$Set = Get-Content -Path "C:\Temp\VmTemplates\DefaultTemplate.xml"
-        }
+        else { [XML]$Set = Get-Content -Path "C:\Temp\VmTemplates\DefaultTemplate.xml" }
 
         # VM name
         if ($Name) { $VMName = $Name }
