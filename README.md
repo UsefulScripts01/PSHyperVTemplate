@@ -22,7 +22,7 @@ To install VMModule on your system follow these steps:
 
 #### 3. Default settings for a new machine
 
-The default settings for a new VM are stored in `.\Desktop\VmTemplate.xml`
+The default settings for a new VM are stored in `"C:\Temp\VmTemplates\DefaultTemplate.xml"`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -59,6 +59,7 @@ The default settings for a new VM are stored in `.\Desktop\VmTemplate.xml`
 
 You can define your own parameter values or use the predefined ones from the VmTemplate.xml file.
 
+`-Template` - [string] Chose XML template to use \
 `-Name` - [string] Name of a new machne (default is "VM_no") \
 `-Generation` - [string] Generation of a new machine (1 or 2, default is 2) \
 `-ISO` - [string] Boot ISO file path \
@@ -76,9 +77,9 @@ Example 2: Generation 2. Start after creation.
 ```powershell
 New-Vmachine -Generation 2 -Start
 ```
-Example 3: Generation 1.
+Example 3: Generation 1. Use the "Linux.xml" template file..
 ```powershell
-New-Vmachine -Generation 1
+New-Vmachine -Generation 1 -Template "Linux"
 ```
 Example 4: Generation 1, boot from the ISO file defined in the parameter.
 ```powershell
