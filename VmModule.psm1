@@ -15,10 +15,16 @@ function New-Vmachine {
         if (!(Test-Path -Path "C:\Temp\VmTemplates")) { New-Item -Path "C:\Temp\VmTemplates" -ItemType Directory }
         if (!(Test-Path -Path "C:\Temp\VmTemplates\DefaultTemplate.xml")) { Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/DefaultTemplate.xml" -OutFile "C:\Temp\VmTemplates\DefaultTemplate.xml" }
 
-        # import template xml
-        if ($Template -and ($Template -match ".xml")) { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\$Template" }
-        elseif ($Template -and ($Template -notmatch ".xml")) { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\${Template}.xml" }
-        else { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\DefaultTemplate.xml" }
+        # templates
+        if ($Template) {
+            if (!$Template.Contains(".xml")) { $Template = "${Template}.xml" } # add .xml
+            $TemplatesList = Get-ChildItem -Path "C:\Temp\VmTemplates\"
+            if ($TemplatesList.Name.Contains($Template)) { [XML]$Set = Get-Content -Path "C:\Temp\VmTemplates\$Template" }
+            else { Write-Warning "$Template file not found.." }
+        }
+        else {
+            [XML]$Set = Get-Content -Path "C:\Temp\VmTemplates\DefaultTemplate.xml"
+        }
 
         # VM name
         if ($Name) { $VMName = $Name }
@@ -60,7 +66,7 @@ function New-Vmachine {
                 Set-VMFirmware $VMName -FirstBootDevice $DVD
             }
         }
-        
+
         # CHANGE SETTINGS ON AN EXISTING MACHINE
         # secure boot
         if ((Get-VM  -Name $VMName).Generation -eq "2") {
