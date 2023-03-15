@@ -16,12 +16,13 @@ function New-Vmachine {
         if (!(Test-Path -Path "C:\Temp\VmTemplates\DefaultTemplate.xml")) { Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/DefaultTemplate.xml" -OutFile "C:\Temp\VmTemplates\DefaultTemplate.xml" }
 
         # import template xml
-        if ($Template) { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\${Template}.xml" }
+        if ($Template -and ($Template -match ".xml")) { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\$Template" }
+        elseif ($Template -and ($Template -notmatch ".xml")) { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\${Template}.xml" }
         else { [XML]$Set = Get-Content -Path "~\Desktop\DefaultTemplates\DefaultTemplate.xml" }
 
         # VM name
         if ($Name) { $VMName = $Name }
-        if (!$Name) {
+        elseif (!$Name) {
             $AutoName = $Set.NewVmachine.Name
             $VMLastNumber = ((Get-Vm -Name $AutoName*).Name | Measure-Object -Maximum).Count
             $VMLastNumber ++
@@ -38,7 +39,7 @@ function New-Vmachine {
 
         # boot ISO
         if ($ISO) { $VMBootISO = $ISO }
-        if (!$ISO) { $VMBootISO = $Set.NewVmachine.DVD.ISO }
+        elseif (!$ISO) { $VMBootISO = $Set.NewVmachine.DVD.ISO }
 
         # generation
         if (!$Generation) { $Generation = $Set.NewVmachine.Generation }
@@ -90,7 +91,7 @@ function New-Vmachine {
 
         # "start" switch
         if ($Start) { Start-VM -Name $VMName }
-        if (!$Start) {
+        elseif (!$Start) {
             switch ($Set.NewVmachine.AutoStart) {
                 0 { }
                 1 { Start-VM -Name $VMName }
@@ -99,7 +100,7 @@ function New-Vmachine {
 
         # automatic run hyper-v manager
         if ($RunManager) { Start-Process -FilePath "virtmgmt.msc" }
-        if (!$RunManager) {
+        elseif (!$RunManager) {
             switch ($Set.NewVmachine.AutoRunManager) {
                 0 { }
                 1 { Start-Process -FilePath "virtmgmt.msc" }
