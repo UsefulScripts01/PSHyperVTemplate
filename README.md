@@ -1,6 +1,6 @@
 ## VmModule
 
-#### 1. Load in current session
+### 1. Load in current session
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
@@ -10,8 +10,22 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModu
 Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
 ```
 
+<hr>
 
-#### 2. Installation
+### 2. Installation
+
+#### Automatic installation process:
+
+- Download the VmModule.ps1 file to .\Documents
+- Add a new entry in the PowerShell profile: `Add-Content -Value "Import-Module -Name .\VmModule.psm1 -Path $PROFILE`
+
+Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/InstallModule.psm1'))
+```
+
+#### Manual installation process:
 
 
 
@@ -23,8 +37,9 @@ To install VMModule on your system follow these steps:
 - If you can't find the profile file, create a new one `New-Item -Path $profile -Type File -Force`
 - Edit the file and insert the command `Import-Module -Name "~\Documents\WindowsPowerShell\VmModule.psm1"`
 
+<hr>
 
-#### 3. Default settings for a new machine
+### 3. Default settings for a new machine
 
 The default settings for a new VM are stored in `"C:\Temp\VmTemplates\DefaultTemplate.xml"`. Copy this file to create additional templates.
 
@@ -59,7 +74,9 @@ The default settings for a new VM are stored in `"C:\Temp\VmTemplates\DefaultTem
 </NewVmachine>
 ```
 
-#### 4. Parameters
+<hr>
+
+### 4. Parameters
 
 You can define your own parameter values or use the predefined ones from the VmTemplate.xml file.
 
@@ -70,6 +87,7 @@ You can define your own parameter values or use the predefined ones from the VmT
 `-Start` - [switch] Start the machine after creation \
 `-RunManager` - [switch] Run Hyper-V Manager
 
+<hr>
 
 #### 5. Examples
 
