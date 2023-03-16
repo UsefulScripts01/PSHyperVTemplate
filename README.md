@@ -8,8 +8,8 @@ Copy the code from the area below and paste it into PowerShell Admin (or Windows
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmModule.psm1" -OutFile "C:\Windows\Temp\VmModule.psm1"
-Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/PSHyperVTemplate.psm1" -OutFile "C:\Windows\Temp\PSHyperVTemplate.psm1"
+Import-Module -Name "C:\Windows\Temp\PSHyperVTemplate.psm1"
 ```
 
 <hr>
@@ -19,7 +19,7 @@ Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
 #### Automatic installation process:
 
 - Download the VmModule.ps1 file to .\Documents
-- Add a new entry in the PowerShell profile: `Import-Module -Name .\VmModule.psm1`
+- Add a new entry in the PowerShell profile: `Import-Module -Name .\PSHyperVTemplate.psm1`
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
@@ -37,7 +37,7 @@ To install VMModule on your system follow these steps:
 - Download VmModule.ps1 to `.\Documents\WindowsPowerShell\` or any other location
 - Locate the PowerShell profile file `.\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
 - If you can't find the profile file, create a new one `New-Item -Path $profile -Type File -Force`
-- Edit the file and insert the command `Import-Module -Name "~\Documents\WindowsPowerShell\VmModule.psm1"`
+- Edit the file and insert the command `Import-Module -Name "~\Documents\WindowsPowerShell\PSHyperVTemplate.psm1"`
 
 <hr>
 
