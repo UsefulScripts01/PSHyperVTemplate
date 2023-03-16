@@ -13,6 +13,10 @@ Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
 
 #### 2. Installation
 
+
+
+Or install it manually:
+
 To install VMModule on your system follow these steps:
 - Download VmModule.ps1 to `.\Documents\WindowsPowerShell\` or any other location
 - Locate the PowerShell profile file `.\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
