@@ -1,5 +1,7 @@
 ## VmModule
 
+### Create Hyper-V virtual machines from XML templates.
+
 ### 1. Load in current session
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
