@@ -7,4 +7,7 @@
 
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/VmModule.psm1" -OutFile "$HOME\Documents\VmModule.psm1"
 if (!$PROFILE) { New-Item -Path $PROFILE -Type File -Force }
-if ($PROFILE) { Add-Content -Value "Import-Module -Name $HOME\Documents\VmModule.psm1" -Path $PROFILE -Force }
+if ($PROFILE) {
+    Add-Content -Value "# Import PowerShell Profile"
+    Add-Content -Value "Import-Module -Name $HOME\Documents\VmModule.psm1" -Path $PROFILE -Force
+}
