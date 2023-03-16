@@ -1,4 +1,4 @@
-## VmModule
+## PSHyperVTemplate
 
 ### Create Hyper-V virtual machines from XML templates.
 
