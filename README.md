@@ -91,7 +91,7 @@ You can define your own parameter values or use the predefined ones from the VmT
 
 <hr>
 
-#### 5. Examples
+### 5. Examples
 
 Example 1: Simple, all parameters from the DefaultTemplate.xml.
 ```powershell
