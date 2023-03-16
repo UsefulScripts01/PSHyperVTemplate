@@ -93,7 +93,7 @@ You can define your own parameter values or use the predefined ones from the VmT
 
 #### 5. Examples
 
-Example 1: Simple, all parameters from the xml template.
+Example 1: Simple, all parameters from the DefaultTemplate.xml.
 ```powershell
 New-Vmachine
 ```
