@@ -17,7 +17,7 @@ Import-Module -Name "C:\Windows\Temp\VmModule.psm1"
 #### Automatic installation process:
 
 - Download the VmModule.ps1 file to .\Documents
-- Add a new entry in the PowerShell profile: `Add-Content -Value "Import-Module -Name .\VmModule.psm1 -Path $PROFILE`
+- Add a new entry in the PowerShell profile: `Import-Module -Name .\VmModule.psm1`
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
