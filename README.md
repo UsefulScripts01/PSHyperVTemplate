@@ -2,19 +2,9 @@
 
 ### Create Hyper-V virtual machines from XML templates.
 
-### 1. Load in current session
 
-Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UsefulScripts01/PsModules/main/PSHyperVTemplate.psm1" -OutFile "C:\Windows\Temp\PSHyperVTemplate.psm1"
-Import-Module -Name "C:\Windows\Temp\PSHyperVTemplate.psm1"
-```
-
-<hr>
-
-### 2. Installation
+### Installation
 
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
@@ -24,7 +14,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 <hr>
 
-### 3. Default settings for a new machine
+### Default settings for a new machine
 
 The default settings for a new VM are stored in `"C:\Temp\VmTemplates\DefaultTemplate.xml"`. Copy this file to create additional templates.
 
@@ -61,7 +51,7 @@ The default settings for a new VM are stored in `"C:\Temp\VmTemplates\DefaultTem
 
 <hr>
 
-### 4. Parameters
+### Parameters
 
 You can define your own parameter values or use the predefined ones from the VmTemplate.xml file.
 
@@ -74,7 +64,7 @@ You can define your own parameter values or use the predefined ones from the VmT
 
 <hr>
 
-### 5. Examples
+### Examples
 
 Example 1: Simple, all parameters from the DefaultTemplate.xml.
 ```powershell
