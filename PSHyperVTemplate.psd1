@@ -9,16 +9,16 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = 'PSHyperVTemplate.psm1'
+# RootModule = ''
 
 # Version number of this module.
-ModuleVersion = '1.0'
+ModuleVersion = '1.0.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '771dc196-2f2e-400b-b980-8c80c0114a22'
+GUID = '3b95a861-7b44-4657-980f-b48b89070946'
 
 # Author of this module
 Author = 'Dawid Prowadzisz'
@@ -69,10 +69,7 @@ Description = 'Create Hyper-V virtual machines from XML templates.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @(
-    "New-Vmachine",
-    "Remove-Vmachine"
-)
+FunctionsToExport = @()
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -104,7 +101,7 @@ PrivateData = @{
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/UsefulScripts01/PSHyperVTemplate'
+        # ProjectUri = 'https://github.com/UsefulScripts01/PSHyperVTemplate'
 
         # A URL to an icon representing this module.
         # IconUri = ''
@@ -132,3 +129,4 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
+
