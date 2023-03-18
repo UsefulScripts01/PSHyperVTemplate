@@ -16,28 +16,11 @@ Import-Module -Name "C:\Windows\Temp\PSHyperVTemplate.psm1"
 
 ### 2. Installation
 
-#### Automatic installation process:
-
-- Download the VmModule.ps1 file to .\Documents
-- Add a new entry in the PowerShell profile: `Import-Module -Name .\PSHyperVTemplate.psm1`
-
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/UsefulScripts01/PSHyperVTemplate/main/InstallModule.ps1'))
 ```
-
-#### Manual installation process:
-
-
-
-Or install it manually:
-
-To install VMModule on your system follow these steps:
-- Download VmModule.ps1 to `.\Documents\WindowsPowerShell\` or any other location
-- Locate the PowerShell profile file `.\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
-- If you can't find the profile file, create a new one `New-Item -Path $profile -Type File -Force`
-- Edit the file and insert the command `Import-Module -Name "~\Documents\WindowsPowerShell\PSHyperVTemplate.psm1"`
 
 <hr>
 
