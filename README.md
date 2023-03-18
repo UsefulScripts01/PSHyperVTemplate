@@ -9,7 +9,7 @@
 Copy the code from the area below and paste it into PowerShell Admin (or Windows Terminal).
 
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/UsefulScripts01/PSHyperVTemplate/main/InstallModule.ps1'))
+Install-Module -Name PSHyperVTemplate
 ```
 
 <hr>
