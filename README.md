@@ -10,6 +10,7 @@ Copy the code from the area below and paste it into PowerShell Admin (or Windows
 
 ```powershell
 Install-Module -Name PSHyperVTemplate
+Import-Module -Name PSHyperVTemplate
 ```
 
 <hr>
